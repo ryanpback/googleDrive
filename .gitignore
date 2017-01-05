@@ -1,6 +1,6 @@
-node_modules/
-bower_componets/
-build/
-tmp/
+node_modules
+bower_components
+build
+tmp
 .DS_Store
 .env

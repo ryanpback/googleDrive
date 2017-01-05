@@ -12,34 +12,29 @@
       <div class="row">
         <form id="mpg">
           <div class="input-field col s4">
-            <select id="make" name="make">
-              <option value="" disabled selected>Select Make</option>
-              <option value="honda">Honda</option>
-              <option value="toyota">Toyota</option>
-              <option value="audi">Audi</option>
-              <option value="ford">Ford</option>
+            <select id="make" name="make" required>
             </select>
           </div>
           <div class="input-field col s4">
-            <select id="model" name="model">
-              <option value="" disabled selected>Select Model</option>
+            <select id="model" name="model" required>
+              <!-- <option value="" disabled selected>Select Model</option> -->
             </select>
           </div>
           <div class="input-field col s4">
-            <select id="year">
-              <option value="" disabled selected>Select year</option>
+            <select id="year" name="year" required>
+              <!-- <option value="" disabled selected>Select year</option> -->
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
               <option value="2014">2014</option>
-              <option value="2016">2016</option>
-              <option value="2016">2016</option>
             </select>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="origin" type="text">
+              <input id="origin" type="text" required>
               <label for="origin">Start</label>
             </div>
             <div class="input-field col s6">
-              <input id="destination" type="text">
+              <input id="destination" type="text" required>
               <label for="destination">End</label>
             </div>
           </div>
@@ -48,14 +43,11 @@
       </div>
       <div id="output"></div>
     </div>
-    <div class="row">
-      <div class="col s10 offset-s2">
+    <center>
       <div class="card">
         <div id="map"></div>
       </div>
-    </div>
-
-    </div>
+    </center>
     <script
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfTldJELwTqc1w6_stwnFXgQPq5qgw2E8&callback=initMap">
    </script>
