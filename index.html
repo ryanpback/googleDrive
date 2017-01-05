@@ -12,19 +12,17 @@
       <div class="row">
         <form id="mpg">
           <div class="input-field col s4">
-            <select id="make">
+            <select id="make" name="make">
               <option value="" disabled selected>Select Make</option>
-              <option value="lexus">Lexus</option>
-              <option value="audi">Audi</option>
+              <option value="honda">Honda</option>
               <option value="toyota">Toyota</option>
+              <option value="audi">Audi</option>
+              <option value="ford">Ford</option>
             </select>
           </div>
           <div class="input-field col s4">
-            <select id="model">
+            <select id="model" name="model">
               <option value="" disabled selected>Select Model</option>
-              <option value="is-250">IS 250</option>
-              <option value="q3">Q3</option>
-              <option value="rav4">Rav4</option>
             </select>
           </div>
           <div class="input-field col s4">
@@ -50,16 +48,14 @@
       </div>
       <div id="output"></div>
     </div>
-    <div id="map"></div>
-    <select id="firstmenu" name="fruit">
-<option value="apple">apple</option>
-<option value="banana">banana</option>
-</select>
-<br/>
-<select id="secondmenu" name="vegetable">
-<option value="carrot">carrot</option>
-<option value="celery">celery</option>
-</select>
+    <div class="row">
+      <div class="col s10 offset-s2">
+      <div class="card">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    </div>
     <script
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfTldJELwTqc1w6_stwnFXgQPq5qgw2E8&callback=initMap">
    </script>

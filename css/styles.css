@@ -8,11 +8,16 @@ a {
   color: #fff;
 }
 #map {
-  height: 50%;
+  height: 100%;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.card {
+  height: 500px;
+  width: 1000px;
 }
