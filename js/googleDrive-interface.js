@@ -28,6 +28,11 @@ window.initMap = function() {
       });
   }
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 $(function() {
  $('select').material_select();
  var originLat;
@@ -43,9 +48,17 @@ $(function() {
     var year = $('#year').val();
     var origin = $('input#origin').val().replace(' ', '+').replace(',', '');
     var dest = $('input#destination').val().replace(' ', '+').replace(',', '');
-    $.get('https://api.edmunds.com/api/editorial/v2/' + make + '/' + model + '/' + year + '?view=basic&fmt=json&api_key=' + vehicleApi, function(response) {
-      mpg = parseInt(response.powertrain.substring(response.powertrain.match(/mpg/).index-3,response.powertrain.match(/mpg/).index-1));
-      newDrive.mpg = mpg;
+    newDrive.make = make;
+    newDrive.model = model;
+    newDrive.year = year;
+    newDrive.origin = origin;
+    newDrive.destination = dest;
+    $.get('https://api.edmunds.com/api/editorial/v2/' + make + '/' + model + '/' + year + '?view=basic&fmt=json&api_key=9v6dagdj489rd4x5mwkm7mwq').then(function(data) {
+      newDrive.mpg = parseInt(data.powertrain.substring(data.powertrain.match(/mpg/).index-3,data.powertrain.match(/mpg/).index-1));
+      $('#test').html(parseInt(data.powertrain.substring(data.powertrain.match(/mpg/).index-3,data.powertrain.match(/mpg/).index-1)));
+      // debugger;
+      $('#output').text('It will take you ' + newDrive.time + ' to travel ' + newDrive.dist.toFixed(2) + ' miles from ' + toTitleCase(origin.replace('+', ' ')) + ' to ' + toTitleCase(dest.replace('+', ' ')) + ' in your ' + newDrive.year + ' ' + newDrive.make + ' ' + toTitleCase(newDrive.model) + '. Your trip will cost you $' + newDrive.getCost().toFixed(2) + "in gas");
+      calculateAndDisplayRoute(directionsService, directionsDisplay, $('input#origin').val(), $('input#destination').val());
 
     });
     $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + origin + '&key=AIzaSyBfTldJELwTqc1w6_stwnFXgQPq5qgw2E8').then(function(originResponse) {
@@ -69,16 +82,15 @@ $(function() {
           }, callback);
 
           function callback(response, status) {
-            var distance = response.rows[0].elements[0].distance.text;
-            var dist = parseFloat(response.rows[0].elements[0].distance.text.slice(0, -3));
-            var duration = response.rows[0].elements[0].duration.text;
-            newDrive.dist = dist;
-            $('#output').text('It will take you ' + duration + ' to travel ' + distance + ' from ' + origin.replace('+', ' ') + ' to ' + dest.replace('+', ' ') + ' in your ' + year + ' ' + make + ' ' + model + '. Your trip will cost you ' + newDrive.getCost());
-            debugger;
-            calculateAndDisplayRoute(directionsService, directionsDisplay, $('input#origin').val(), $('input#destination').val());
-            // $('#results-body').text('The mpg for the ' + year + ' ' + make + ' ' + model + ' is ' + newResponse + '.');
-            // See Parsing the Results for
-            // the basics of a callback function.
+            if (status =="OK"){
+              var distance = response.rows[0].elements[0].distance.text;
+              var dist = parseFloat(response.rows[0].elements[0].distance.text.slice(0, -3).replace(",",""));
+              var duration = response.rows[0].elements[0].duration.text;
+              newDrive.dist = dist/ 1.609344;
+              newDrive.time = duration;
+
+            }
+
           }
       });
     });
