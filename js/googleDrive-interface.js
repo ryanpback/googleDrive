@@ -57,7 +57,7 @@ $(function() {
       newDrive.mpg = parseInt(data.powertrain.substring(data.powertrain.match(/mpg/).index-3,data.powertrain.match(/mpg/).index-1));
       $('#test').html(parseInt(data.powertrain.substring(data.powertrain.match(/mpg/).index-3,data.powertrain.match(/mpg/).index-1)));
       // debugger;
-      $('#output').text('It will take you ' + newDrive.time + ' to travel ' + newDrive.dist.toFixed(2) + ' miles from ' + toTitleCase(origin.replace('+', ' ')) + ' to ' + toTitleCase(dest.replace('+', ' ')) + ' in your ' + newDrive.year + ' ' + newDrive.make + ' ' + toTitleCase(newDrive.model) + '. Your trip will cost you $' + newDrive.getCost().toFixed(2) + "in gas");
+      $('#output').text('It will take you ' + newDrive.time + ' to travel ' + newDrive.dist.toFixed(2) + ' miles from ' + toTitleCase(origin.replace('+', ' ')) + ' to ' + toTitleCase(dest.replace('+', ' ')) + ' in your ' + newDrive.year + ' ' + newDrive.make + ' ' + toTitleCase(newDrive.model) + '. Your trip will cost you $' + newDrive.getCost().toFixed(2) + " in gas");
       calculateAndDisplayRoute(directionsService, directionsDisplay, $('input#origin').val(), $('input#destination').val());
 
     });
