@@ -1,6 +1,8 @@
 var vehicleApi = require('./../.env').vehicleApi;
 var googleApi = require('./../.env').googleApi;
+var GoogleDrive = require('./../js/googleDrive.js').driveModule;
 var map;
+
 window.initMap = function() {
       var myLatLng = {lat: 45.072350, lng: -122.401209};
       directionsService = new google.maps.DirectionsService();
@@ -11,7 +13,7 @@ window.initMap = function() {
       directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(map);
 
-  }
+  };
   function calculateAndDisplayRoute(directionsService, directionsDisplay, or, dest) {
       directionsService.route({
           origin: or,
@@ -32,16 +34,19 @@ $(function() {
  var originLong;
  var destLat;
  var destLong;
+ // const GASPRICE = 2.342;
   $('#mpg').submit(function(event) {
     event.preventDefault();
+    var newDrive = new GoogleDrive();
     var make = $('#make').val();
     var model = $('#model').val();
     var year = $('#year').val();
     var origin = $('input#origin').val().replace(' ', '+').replace(',', '');
     var dest = $('input#destination').val().replace(' ', '+').replace(',', '');
-
     $.get('https://api.edmunds.com/api/editorial/v2/' + make + '/' + model + '/' + year + '?view=basic&fmt=json&api_key=' + vehicleApi, function(response) {
-      newResponse = parseInt(response.powertrain.substring(response.powertrain.match(/mpg/).index-3,response.powertrain.match(/mpg/).index-1));
+      mpg = parseInt(response.powertrain.substring(response.powertrain.match(/mpg/).index-3,response.powertrain.match(/mpg/).index-1));
+      newDrive.mpg = mpg;
+
     });
     $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + origin + '&key=AIzaSyBfTldJELwTqc1w6_stwnFXgQPq5qgw2E8').then(function(originResponse) {
       originLat = originResponse.results[0].geometry.viewport.southwest.lat;
@@ -65,9 +70,12 @@ $(function() {
 
           function callback(response, status) {
             var distance = response.rows[0].elements[0].distance.text;
+            var dist = parseFloat(response.rows[0].elements[0].distance.text.slice(0, -3));
             var duration = response.rows[0].elements[0].duration.text;
-            $('#output').text('It will take you ' + duration + ' to travel ' + distance + ' from ' + origin.replace('+', ' ') + ' to ' + dest.replace('+', ' ') + ' in your ' + year + ' ' + make + ' ' + model + '.');
-            calculateAndDisplayRoute(directionsService, directionsDisplay, $('input#origin').val(), $('input#destination').val())
+            newDrive.dist = dist;
+            $('#output').text('It will take you ' + duration + ' to travel ' + distance + ' from ' + origin.replace('+', ' ') + ' to ' + dest.replace('+', ' ') + ' in your ' + year + ' ' + make + ' ' + model + '. Your trip will cost you ' + newDrive.getCost());
+            debugger;
+            calculateAndDisplayRoute(directionsService, directionsDisplay, $('input#origin').val(), $('input#destination').val());
             // $('#results-body').text('The mpg for the ' + year + ' ' + make + ' ' + model + ' is ' + newResponse + '.');
             // See Parsing the Results for
             // the basics of a callback function.
