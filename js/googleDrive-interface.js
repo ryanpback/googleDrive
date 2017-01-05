@@ -1,6 +1,7 @@
 var vehicleApi = require('./../.env').vehicleApi;
 var googleApi = require('./../.env').googleApi;
 var GoogleDrive = require('./../js/googleDrive.js').driveModule;
+// OAuth.initialize('GT6-nudPxa2C0KhPDe_9TRE4zmg');
 var map;
 
 
@@ -36,6 +37,22 @@ function toTitleCase(str)
 }
 
 $(function() {
+//   OAuth.popup('github').done(function(results) {
+//     var token = results.access_token;
+//     $.ajax({
+//       type: 'GET',
+//       url: 'https://api.github.com/?access_token='+token
+//       }).done(function(response) {
+//         debugger;
+//         console.log(response);
+//     });
+//     // $.get('https://api.github.com/users?' + token).then(function(response){
+//     //   newDrive.userName = response.login;
+//     // });
+// }).fail(function(err) {
+//   //todo when the OAuth flow failed
+// });
+
   var originLat;
   var originLong;
   var destLat;

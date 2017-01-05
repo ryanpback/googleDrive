@@ -1,4 +1,5 @@
 function GoogleDrive() {
+  this.userName = '';
   this.dist = 0;
   this.mpg = 0;
   this.time = 0;
@@ -14,5 +15,6 @@ GoogleDrive.prototype.getCost = function () {
   var mpg = this.mpg;
   return ((dist*2.342)/mpg);
 };
+
 
 exports.driveModule = GoogleDrive;

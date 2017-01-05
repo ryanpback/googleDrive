@@ -1,12 +1,12 @@
 {
-  "name": "alarmclock",
+  "name": "googleDrive",
   "version": "1.0.0",
-  "description": "This is an alarm clock",
+  "description": "This is not an alarm clock",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ryan Back and Lucas Keysboe",
+  "author": "Ryan Back and Diego Suarez",
   "license": "ISC",
   "devDependencies": {
     "bower-files": "^3.14.1",
@@ -22,6 +22,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "materialize-css": "^0.97.8"
+    "materialize-css": "^0.97.8",
+    "oauthio-web": "^0.6.1"
   }
 }

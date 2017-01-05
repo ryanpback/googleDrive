@@ -11,15 +11,60 @@ a {
   height: 100%;
 }
 /* Optional: Makes the sample page fill the window. */
-html, body {
+/*html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}*/
+
+.header {
+  text-align: center;
 }
 
-.card {
+#map-card {
   height: 50vw;
   width: 70vw;
-  max-width: 1200px;
-  max-height: 600px;
+  max-width: 100%;
+  max-height: 500px;
+}
+
+#mpg-button {
+  margin-bottom: 20px;
+}
+
+.types {
+  margin-top: 20px;
+}
+#origin {
+  margin-left: 16px;
+  margin-right: -10px;
+}
+#destination {
+  margin
+}
+
+#output {
+  margin-top: 15px;
+}
+
+.select-wrapper input.select-dropdown {
+  font-family: monospace;
+  font-weight: bold;
+  color: #26a69a;
+}
+
+label {
+  font-family: monospace;
+}
+
+.input-field label{
+  color: #6d46db;
+}
+
+.select-wrapper span.caret {
+  color: #6d46db;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+  font-family: monospace;
 }

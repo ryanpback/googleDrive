@@ -4,50 +4,64 @@
     <link rel="stylesheet" href="build/css/vendor.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Google Drive</title>
+    <script src="js/oauth.js"></script>
     <script src="build/js/vendor.min.js"></script>
     <script type="text/javascript" src="build/js/app.js"></script>
   </head>
   <body>
     <div class="container">
+      <div class="row header">
+        <div class="col s12">
+          <h1>Trip Cost</h1>
+        </div>
+      </div>
       <div class="row">
-        <form id="mpg">
-          <div class="input-field col s4">
-            <select id="make" name="make" required>
-            </select>
+        <div class="col s12 m4 l4">
+          <div class="card">
+            <form id="mpg">
+              <div class="input-field col s4 types">
+                <select id="make" name="make" required>
+                </select>
+              </div>
+              <div class="input-field col s4 types">
+                <select id="model" name="model" required>
+                  <!-- <option value="" disabled selected>Select Model</option> -->
+                </select>
+              </div>
+              <div class="input-field col s4 types">
+                <select id="year" name="year" required>
+                  <!-- <option value="" disabled selected>Select year</option> -->
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="origin" type="text" required>
+                  <label id="origin" for="origin">Start</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="destination" type="text" required>
+                  <label id="destination-label" for="destination">End</label>
+                </div>
+              </div>
+              <center>
+                <button type="submit" class="btn" id="mpg-button">Find MPG</button>
+              </center>
+            </form>
           </div>
-          <div class="input-field col s4">
-            <select id="model" name="model" required>
-              <!-- <option value="" disabled selected>Select Model</option> -->
-            </select>
-          </div>
-          <div class="input-field col s4">
-            <select id="year" name="year" required>
-              <!-- <option value="" disabled selected>Select year</option> -->
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-              <option value="2014">2014</option>
-            </select>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="origin" type="text" required>
-              <label for="origin">Start</label>
+          <div id="output"></div>
+        </div>
+        <div class="col s12 m8 l6">
+          <center>
+            <div class="card" id="map-card">
+              <div id="map"></div>
             </div>
-            <div class="input-field col s6">
-              <input id="destination" type="text" required>
-              <label for="destination">End</label>
-            </div>
-          </div>
-          <button type="submit" class="btn" id="mpg-button">Find MPG</button>
-        </form>
+          </center>
+        </div>
       </div>
-      <div id="output"></div>
     </div>
-    <center>
-      <div class="card">
-        <div id="map"></div>
-      </div>
-    </center>
     <script
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfTldJELwTqc1w6_stwnFXgQPq5qgw2E8&callback=initMap">
    </script>
